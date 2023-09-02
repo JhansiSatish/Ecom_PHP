@@ -6,4 +6,3 @@ if(isset($_SESSION['auth'])){
     $_SESSION['message']="logged out successfully";
 }
 header('location:index.php');
-?>

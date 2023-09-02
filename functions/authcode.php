@@ -39,13 +39,15 @@ if (isset($_POST['submit'])) {
         $userdata = mysqli_fetch_array($result);
         $username = $userdata['name'];
         $useremail = $userdata['email'];
+        $
 
 
         $_SESSION['auth_user'] = [
             'name' => $username,
             'email' => $useremail
-
+             
         ];
+
         $_SESSION['message'] = "logged in successfully";
         header('location:../index.php');
     } else {

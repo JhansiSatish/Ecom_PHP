@@ -1,6 +1,7 @@
 <?php
 session_start();
 include('../config/dbcon.php');
+include('myfunctions.php');
 if (isset($_POST['submit'])) {
     $name = mysqli_real_escape_string($con, $_POST['name']);
     $email = mysqli_real_escape_string($con, $_POST['email']);
@@ -39,19 +40,21 @@ if (isset($_POST['submit'])) {
         $userdata = mysqli_fetch_array($result);
         $username = $userdata['name'];
         $useremail = $userdata['email'];
-        $
+        $role_as = $userdata['role_as'];
 
 
         $_SESSION['auth_user'] = [
             'name' => $username,
             'email' => $useremail
-             
-        ];
 
-        $_SESSION['message'] = "logged in successfully";
-        header('location:../index.php');
+        ];
+        $_SESSION['role_as'] = $role_as;
+        if ($role_as == 1) {
+            redirect("../admin/index.php", "Welcome to Dashboard");
+        } else {
+            redirect("../index.php", "logged In Successfully");
+        }
     } else {
-        $_SESSION['message'] = "Invalid Credentials";
-        header('location:../login.php');
+        redirect("../login.php", "Invalid Credentials");
     }
 }

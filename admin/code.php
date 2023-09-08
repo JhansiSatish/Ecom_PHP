@@ -25,4 +25,37 @@ if (isset($_POST['add_category'])) {
     } else {
         redirect("category.php", "Something Went Wrong ");
     }
+} else if (isset($_POST['update_category'])) {
+    $category_id = $_POST['category_id'];
+    $name = $_POST['name'];
+    $slug = $_POST['slug'];
+    $description = $_POST['description'];
+    $meta_titel = $_POST['meta_titel'];
+    $meta_description = $_POST['meta_description'];
+    $meta_keywords = $_POST['meta_keywords'];
+    $status = isset($_POST['status']) ? '1' : '0';
+    $popular = isset($_POST['popular']) ? '1' : '0';
+    $new_image = $_FILES['image']['name'];
+    $old_image = $_POST['old_image'];
+    if ($new_image != "") {
+        // $update_file = $new_image;
+        $image_ext = pathinfo($new_image, PATHINFO_EXTENSION);
+        $update_file = time() . '.' . $image_ext;
+    } else {
+        $update_file = $old_image;
+    }
+}
+$path = "../uplodes";
+$update = "update categories set name='$name',slug='$slug',description='$description',meta_title='$meta_titel',meta_description='$meta_description',mete_keywords='meta_keywords',status='$status',popular='$popular',image='$update_file' where id='$category_id'";
+$update_result = mysqli_query($con, $update);
+if ($update_result) {
+    if ($_FILES['image']['name'] != "") {
+        move_uploaded_file($_FILES['image']['tmp_name'], $path . '/' . $update_file);
+        if (file_exists("../uplodes/" . $old_image)) {
+            unlink("../uplodes/" . $old_image);
+        }
+    }
+    redirect("edit.cat.php?id=$category_id", "Category Updated Successfully");
+} else {
+    redirect("edit.cat.php?id=$category_id", "Something Went Wrong");
 }

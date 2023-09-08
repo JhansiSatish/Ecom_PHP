@@ -35,7 +35,7 @@ include('../middleware/adminmiddleware.php');
                             </div>
                             <div class="col-md-12">
                                 <label for="">Meta Description</label>
-                                <input type="text" class="form-control" name="meta_description" placeholder="Enter meta Description">
+                                <textarea rows="3" class="form-control" name="meta_description" placeholder="Enter meta Description"></textarea>
                             </div>
                             <div class="col-md-12">
                                 <label for="">Meta Keywords</label>

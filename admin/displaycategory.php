@@ -38,7 +38,7 @@ include('../middleware/adminmiddleware.php');
                                         </td>
                                         <td><?= $item['status'] == '0' ? "Visible" : "Hidden" ?></td>
                                         <td>
-                                            <a href="#" class="btn btn-primary">Edit</a>
+                                            <a href="edit.cat.php?id=<?= $item['id']; ?>" class="btn btn-primary">Edit</a>
                                         </td>
                                     </tr>
                             <?php

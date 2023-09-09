@@ -44,18 +44,37 @@ if (isset($_POST['add_category'])) {
     } else {
         $update_file = $old_image;
     }
-}
-$path = "../uplodes";
-$update = "update categories set name='$name',slug='$slug',description='$description',meta_title='$meta_titel',meta_description='$meta_description',mete_keywords='meta_keywords',status='$status',popular='$popular',image='$update_file' where id='$category_id'";
-$update_result = mysqli_query($con, $update);
-if ($update_result) {
-    if ($_FILES['image']['name'] != "") {
-        move_uploaded_file($_FILES['image']['tmp_name'], $path . '/' . $update_file);
-        if (file_exists("../uplodes/" . $old_image)) {
-            unlink("../uplodes/" . $old_image);
+
+    $path = "../uplodes";
+    $update = "update categories set name='$name',slug='$slug',description='$description',meta_title='$meta_titel',meta_description='$meta_description',mete_keywords='meta_keywords',status='$status',popular='$popular',image='$update_file' where id='$category_id'";
+    $update_result = mysqli_query($con, $update);
+    if ($update_result) {
+        if ($_FILES['image']['name'] != "") {
+            move_uploaded_file($_FILES['image']['tmp_name'], $path . '/' . $update_file);
+            if (file_exists("../uplodes/" . $old_image)) {
+                unlink("../uplodes/" . $old_image);
+            }
         }
+        redirect("edit.cat.php?id=$category_id", "Category Updated Successfully");
+    } else {
+        redirect("edit.cat.php?id=$category_id", "Something Went Wrong");
     }
-    redirect("edit.cat.php?id=$category_id", "Category Updated Successfully");
-} else {
-    redirect("edit.cat.php?id=$category_id", "Something Went Wrong");
+} else if (isset($_POST['delete_cat'])) {
+    $category_id = mysqli_real_escape_string($con, $_POST['category_id']);
+
+    $category_img = "select * from categories where id='$category_id'";
+    $img_result = mysqli_query($con, $category_img);
+    $image_data = mysqli_fetch_array($img_result);
+    $image = $image_data['image'];
+
+    $delete_item = "delete from categories where id='$category_id'";
+    $delete_result = mysqli_query($con, $delete_item);
+    if ($delete_result) {
+        if (file_exists("../uplodes/" . $image)) {
+            unlink("../uplodes/" . $image);
+        }
+        redirect("displaycategory.php", "Category Deleted Successfully");
+    } else {
+        redirect("displaycategory.php", "Something Went wrong");
+    }
 }

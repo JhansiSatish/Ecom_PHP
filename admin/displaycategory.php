@@ -20,7 +20,7 @@ include('../middleware/adminmiddleware.php');
                                 <th>Name</th>
                                 <th>Image</th>
                                 <th>Status</th>
-                                <th>Edit</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -39,6 +39,10 @@ include('../middleware/adminmiddleware.php');
                                         <td><?= $item['status'] == '0' ? "Visible" : "Hidden" ?></td>
                                         <td>
                                             <a href="edit.cat.php?id=<?= $item['id']; ?>" class="btn btn-primary">Edit</a>
+                                            <form action="code.php" method="POST">
+                                                <input type="hidden" name="category_id" value="<?= $item['id']; ?>">
+                                                <button type="submit" class="btn btn-dark" name="delete_cat">Delete</button>
+                                            </form>
                                         </td>
                                     </tr>
                             <?php

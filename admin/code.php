@@ -77,4 +77,35 @@ if (isset($_POST['add_category'])) {
     } else {
         redirect("displaycategory.php", "Something Went wrong");
     }
+} else if (isset($_POST['add_product'])) {
+    $category_id = $_POST['category_id'];
+    $name = $_POST['name'];
+    $slug = $_POST['slug'];
+    $small_description = $_POST['small_description'];
+    $description = $_POST['description'];
+    $original_price = $_POST['original_price'];
+    $selling_price = $_POST['selling_price'];
+    $qty = $_POST['qty'];
+    $meta_titel = $_POST['meta_titel'];
+    $meta_description = $_POST['meta_description'];
+    $meta_keywords = $_POST['meta_keywords'];
+    $status = isset($_POST['status']) ? '1' : '0';
+    $trending = isset($_POST['trending']) ? '1' : '0';
+    $image = $_FILES['image']['name'];
+    $path = "../uplodes";
+    $image_ext = pathinfo($image, PATHINFO_EXTENSION);
+    $filename = time() . '.' . $image_ext;
+
+    if ($name != "" && $slug != "" && $description != "") {
+        $pro_querry = "insert into products(category_id,name,slug,small_description,description,original_price,selling_price,qty,status,trending,meta_title,meta_keywords,meta_description,image) values ('$category_id','$name','$slug','$small_description','$description','$original_price','$selling_price','$qty','$status','$trending','$meta_titel','$meta_keywords','$meta_description','$filename')";
+        $pro_result = mysqli_query($con, $pro_querry);
+        if ($pro_result) {
+            move_uploaded_file($_FILES['image']['tmp_name'], $path . '/' . $filename);
+            redirect("addproducts.php", "Product Add Successfully ");
+        } else {
+            redirect("addproducts.php", "Something went Wrong ");
+        }
+    } else {
+        redirect("addproducts.php", "All Fields are mandatory ");
+    }
 }

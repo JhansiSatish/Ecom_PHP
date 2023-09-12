@@ -1,6 +1,8 @@
 <?php
+
 include('includes/header.php');
 include('../middleware/adminmiddleware.php');
+
 ?>
 <div class="container">
 

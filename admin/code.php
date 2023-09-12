@@ -148,6 +148,26 @@ if (isset($_POST['add_category'])) {
     } else {
         redirect("edit-product.php?id=$product_id", "Something Went Wrong");
     }
+} else if (isset($_POST['delete_product_btn'])) {
+    $product_id = mysqli_real_escape_string($con, $_POST['product_id']);
+
+    $product_img = "select * from products where id='$product_id'";
+    $img_result = mysqli_query($con, $product_img);
+    $image_data = mysqli_fetch_array($img_result);
+    $image = $image_data['image'];
+
+    $delete_product = "delete from products where id='$product_id'";
+    $product_result = mysqli_query($con, $delete_product);
+    if ($product_result) {
+        if (file_exists("../uplodes/" . $image)) {
+            unlink("../uplodes/" . $image);
+        }
+        // echo 200;
+        redirect("displayproduct.php", "product Deleted Successfully");
+    } else {
+         redirect("displayproduct.php", "Something Went wrong");
+        // echo 500;
+    }
 } else {
     header('location:../index.php');
 }

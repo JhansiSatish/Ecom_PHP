@@ -41,7 +41,7 @@ include('../middleware/adminmiddleware.php');
                                             <a href="edit-cat.php?id=<?= $item['id']; ?>" class="btn btn-primary btn-sm">Edit</a>
                                             <form action="code.php" method="POST">
                                                 <input type="hidden" name="category_id" value="<?= $item['id']; ?>">
-                                                <button type="submit" class="btn btn-dark btn-sm" name="delete_cat">Delete</button>
+                                                <button type="submit" class="btn btn-dark" name="delete_cat">Delete</button>
                                             </form>
                                         </td>
                                     </tr>

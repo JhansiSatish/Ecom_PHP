@@ -12,7 +12,7 @@ include('../middleware/adminmiddleware.php');
                     <h4>products</h4>
 
                 </div>
-                <div class="card-body">
+                <div class="card-body" id="products_table">
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
@@ -43,10 +43,10 @@ include('../middleware/adminmiddleware.php');
 
                                         </td>
                                         <td>
-                                            <form action="code.php" method="POST">
-                                                <input type="hidden" name="product_id" value="<?= $item['id']; ?>">
-                                                <button type="submit" class="btn btn-dark btn-sm" name="delete_product">Delete</button>
-                                            </form>
+
+
+                                            <button type="button" class="btn btn-dark btn-sm delete_product_btn" value="<?= $item['id']; ?>">Delete</button>
+
                                         </td>
                                     </tr>
                             <?php

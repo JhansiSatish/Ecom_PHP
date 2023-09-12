@@ -108,4 +108,46 @@ if (isset($_POST['add_category'])) {
     } else {
         redirect("addproducts.php", "All Fields are mandatory ");
     }
+} else if (isset($_POST['update_product'])) {
+    $product_id = $_POST['product_id'];
+    $category_id = $_POST['category_id'];
+    $name = $_POST['name'];
+    $slug = $_POST['slug'];
+    $small_description = $_POST['small_description'];
+    $description = $_POST['description'];
+    $original_price = $_POST['original_price'];
+    $selling_price = $_POST['selling_price'];
+    $qty = $_POST['qty'];
+    $meta_title = $_POST['meta_titel'];
+    $meta_description = $_POST['meta_description'];
+    $meta_keywords = $_POST['meta_keywords'];
+    $status = isset($_POST['status']) ? '1' : '0';
+    $trending = isset($_POST['trending']) ? '1' : '0';
+    $image = $_FILES['image']['name'];
+    $path = "../uplodes";
+    $new_image = $_FILES['image']['name'];
+    $old_image = $_POST['old_image'];
+    if ($new_image != "") {
+        // $update_file = $new_image;
+        $image_ext = pathinfo($new_image, PATHINFO_EXTENSION);
+        $update_file = time() . '.' . $image_ext;
+    } else {
+        $update_file = $old_image;
+    }
+
+    $update_pro = "update products set name='$name',slug='$slug',small_description='$small_description',description='$description',original_price='$original_price',selling_price='$selling_price',qty='$qty',meta_title='$meta_title',meta_description='$meta_description',meta_keywords='$meta_keywords',status='$status',trending='$trending',image='$update_file' where id='$product_id'";
+    $updatepro_result = mysqli_query($con, $update_pro);
+    if ($updatepro_result) {
+        if ($_FILES['image']['name'] != "") {
+            move_uploaded_file($_FILES['image']['tmp_name'], $path . '/' . $update_file);
+            if (file_exists("../uplodes/" . $old_image)) {
+                unlink("../uplodes/" . $old_image);
+            }
+        }
+        redirect("edit-product.php?id=$product_id", "Category Updated Successfully");
+    } else {
+        redirect("edit-product.php?id=$product_id", "Something Went Wrong");
+    }
+} else {
+    header('location:../index.php');
 }

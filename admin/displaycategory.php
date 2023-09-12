@@ -26,7 +26,7 @@ include('../middleware/adminmiddleware.php');
                         <tbody>
                             <?php
 
-                            $category  = getall("categories");
+                            $category  = getAll("categories");
                             if (mysqli_num_rows($category) > 0) {
                                 foreach ($category as $item) {
                             ?>
@@ -55,7 +55,7 @@ include('../middleware/adminmiddleware.php');
                         </tbody>
 
                     </table>
-                    </table>
+
                 </div>
             </div>
 

@@ -21,7 +21,7 @@ if (isset($_GET['product'])) {
                 </h6>
             </div>
         </div>
-        <div class="bg-light py-4">
+        <div class="bg-light product-data py-4">
             <div class="container mt-3">
                 <div class="row">
                     <div class="col-md-4">
@@ -47,7 +47,13 @@ if (isset($_GET['product'])) {
                         </div>
                         <div class="row">
                             <div class="col-md-4">
-                                <input type="text">
+
+                                <div class="input-group mb-3" style="width: 110px;">
+                                    <button class="input-group-text decrement-btn">-</button>
+                                    <input type="text" class="form-control bg-white input-qty text-center" value="1" disabled>
+                                    <button class="input-group-text increment-btn">+</button>
+                                </div>
+
                             </div>
                         </div>
                         <div class="row mt-3">
@@ -72,4 +78,4 @@ if (isset($_GET['product'])) {
 } else {
     echo "Something went wrong";
 }
-include('includes/footer.php');
+include('includes/footer.php'); ?>

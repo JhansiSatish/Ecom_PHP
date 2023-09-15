@@ -35,7 +35,7 @@ if (isset($_GET['category'])) {
                                 foreach ($products as $item) {
                             ?>
                                     <div class="col-md-3 mb-2">
-                                        <a href="#">
+                                        <a href="product-view.php?product=<?= $item['slug']; ?>">
                                             <div class="card shadow">
                                                 <div class="card-body">
                                                     <img src="uplodes/<?= $item['image']; ?>" alt="Product  Name" class="w-100">

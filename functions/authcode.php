@@ -38,12 +38,14 @@ if (isset($_POST['submit'])) {
     if (mysqli_num_rows($result) > 0) {
         $_SESSION['auth'] = true;
         $userdata = mysqli_fetch_array($result);
+        $userid = $userdata['id'];
         $username = $userdata['name'];
         $useremail = $userdata['email'];
         $role_as = $userdata['role_as'];
 
 
         $_SESSION['auth_user'] = [
+            'user_id' => $userid,
             'name' => $username,
             'email' => $useremail
 

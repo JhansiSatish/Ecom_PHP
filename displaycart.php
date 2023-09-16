@@ -1,6 +1,7 @@
 <?php
 include('functions/userfunctions.php');
-include('includes/header.php'); ?>
+include('includes/header.php');
+include('authenticate.php') ?>
 
 <div class="py-3 bg-primary">
     <div class="container">
@@ -57,10 +58,11 @@ include('includes/header.php'); ?>
                                     <h5><?= $citem['selling_price']; ?></h5>
                                 </div>
                                 <div class="col-md-3">
+                                    <input type="hidden" class="prodId" value="<?= $citem['prod_id']; ?>">
                                     <div class="input-group mb-3" style="width: 110px;">
-                                        <button class="input-group-text decrement-btn">-</button>
+                                        <button class="input-group-text decrement-btn updateQty">-</button>
                                         <input type="text" class="form-control bg-white input-qty text-center" value="<?= $citem['prod_qty']; ?>" disabled>
-                                        <button class="input-group-text increment-btn">+</button>
+                                        <button class="input-group-text increment-btn updateQty">+</button>
                                     </div>
                                 </div>
                                 <div class="col-md-2">

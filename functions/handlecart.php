@@ -41,7 +41,23 @@ if (isset($_SESSION['auth'])) {
                     echo " Something Went Wrong";
                 }
                 break;
-
+            case "Delete":
+                $cart_id = $_POST['cart_id'];
+                $user_id = $_SESSION['auth_user']['user_id'];
+                $chk_prod_cart = "select * from carts where id='$cart_id' and user_id='$user_id' ";
+                $chk_prod_cart_result = mysqli_query($con, $chk_prod_cart);
+                if (mysqli_num_rows($chk_prod_cart_result) > 0) {
+                    $delete_cart = "Delete from carts where id='$cart_id'  ";
+                    $delete_cart_result = mysqli_query($con, $delete_cart);
+                    if ($delete_cart_result) {
+                        echo 200;
+                    } else {
+                        echo " Something Went Wrong";
+                    }
+                } else {
+                    echo " Something Went Wrong";
+                }
+                break;
             default:
                 echo 500;
         }

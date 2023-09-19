@@ -41,6 +41,15 @@ if (isset($_SESSION['auth'])) {
                 $price = $citem['selling_price'];
                 $insert_items_querry = "insert into order_items(order_id,prod_id,qty,price) values ('$order_id','$prod_id','$prod_qty','$price')";
                 $result_insert_items_querry =  mysqli_query($con, $insert_items_querry);
+
+                $update_qty = "select * from carts where id='$prod_id' limit 1";
+                $result_update_qty = mysqli_query($con, $update_qty);
+                $update_qty_data= mysqli_fetch_array($result_update_qty);
+                $current_qty= $update_qty_data['qty'];
+                $new_qty=$current_qty- $prod_qty;
+                $update_new_qty="update products set qty='$new_qty' where id=$prod_id";
+                $result_update_new_qty=  mysqli_query($con, $update_new_qty);
+
             }
             $deteteCartItems = "delete from carts where user_id = '$userId'";
             $result_deteteCartItems =  mysqli_query($con, $deteteCartItems);

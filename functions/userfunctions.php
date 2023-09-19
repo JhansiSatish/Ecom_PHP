@@ -27,6 +27,15 @@ function getCart()
     $sql = "select c.id as cid,  c.prod_id,c.prod_qty, p.id as pid, p.name,p.image,p.selling_price  from carts c , products p where c.prod_id=p.id and c.user_id = '$userId' order by c.id desc ";
     return $result = mysqli_query($con, $sql);
 }
+function getOrders()
+{
+    global $con;
+    $userId = $_SESSION['auth_user']['user_id'];
+    $orders_qry = "select * from orders where user_id='$userId' order by id desc ";
+    return $result = mysqli_query($con, $orders_qry);
+}
+
+
 function redirect($url, $message)
 {
     $_SESSION['message'] = $message;

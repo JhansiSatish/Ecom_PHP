@@ -8,6 +8,12 @@ function getAllActive($table)
     $sql = "select * from $table where status='0'";
     return $result = mysqli_query($con, $sql);
 }
+function getAllTrending()
+{
+    global $con;
+    $sql = "select * from products where trending='1'";
+    return $result = mysqli_query($con, $sql);
+}
 function getSlugActive($table, $slug)
 {
     global $con;

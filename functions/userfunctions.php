@@ -34,6 +34,14 @@ function getOrders()
     $orders_qry = "select * from orders where user_id='$userId' order by id desc ";
     return $result = mysqli_query($con, $orders_qry);
 }
+function checkTackingValid($trackingNo)
+{
+    global $con;
+    $userId = $_SESSION['auth_user']['user_id'];
+    $sql = "select * from orders where tracking_no='$trackingNo' and  user_id='$userId'";
+    return $result = mysqli_query($con, $sql);
+}
+
 
 
 function redirect($url, $message)

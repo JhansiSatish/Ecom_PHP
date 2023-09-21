@@ -165,8 +165,16 @@ if (isset($_POST['add_category'])) {
         // echo 200;
         redirect("displayproduct.php", "product Deleted Successfully");
     } else {
-         redirect("displayproduct.php", "Something Went wrong");
+        redirect("displayproduct.php", "Something Went wrong");
         // echo 500;
+    }
+} else if (isset($_POST['update_order_status_btn'])) {
+    $track_no = $_POST['tracking_no'];
+    $order_satuse = $_POST['order_satuse'];
+    $update_order_status = "update orders set status='$order_satuse' where tracking_no='$track_no'";
+    $result_status = mysqli_query($con, $update_order_status);
+    if ($result_status) {
+        redirect("view-order.php?t=$track_no", "Order Status Updated Successfully");
     }
 } else {
     header('location:../index.php');

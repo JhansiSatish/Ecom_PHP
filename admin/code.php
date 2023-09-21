@@ -55,9 +55,9 @@ if (isset($_POST['add_category'])) {
                 unlink("../uplodes/" . $old_image);
             }
         }
-        redirect("edit.cat.php?id=$category_id", "Category Updated Successfully");
+        redirect("edit-cat.php?id=$category_id", "Category Updated Successfully");
     } else {
-        redirect("edit.cat.php?id=$category_id", "Something Went Wrong");
+        redirect("edit-cat.php?id=$category_id", "Something Went Wrong");
     }
 } else if (isset($_POST['delete_cat'])) {
     $category_id = mysqli_real_escape_string($con, $_POST['category_id']);

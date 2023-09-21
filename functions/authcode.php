@@ -20,10 +20,10 @@ if (isset($_POST['submit'])) {
             $result = mysqli_query($con, $sql);
             if ($result) {
                 $_SESSION['message'] = "Registered Successfully";
-                header('location:login.php');
+                header('location:../login.php');
             } else {
                 $_SESSION['message'] = "Something went wrong";
-                header('location:/..register.php');
+                header('location:../register.php');
             }
         } else {
             $_SESSION['message'] = "Password is not match";

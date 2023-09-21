@@ -84,6 +84,7 @@ include('authenticate.php') ?>
                             <div>
                                 <input type="hidden" name="payment_method" value="COD">
                                 <button type="submit" name="placeOrderBtn" class="btn btn-primary my-2">Confirm and place order | COD</button>
+                                <div id="paypal-button-container"></div>
                             </div>
                         </div>
                     </div>
@@ -95,3 +96,5 @@ include('authenticate.php') ?>
 
 
 <?php include('includes/footer.php'); ?>
+<!-- Replace the "test" client-id value with your client-id -->
+<script src="https://www.paypal.com/sdk/js?client-id=AXucFrDx7Dl78mf23PNsQ7MMsfHXugysMer81CylbRnJSj8cncZstmNkwg_wD6PzVAzl4jXczmdqtLIb&currency=USD"></script>
